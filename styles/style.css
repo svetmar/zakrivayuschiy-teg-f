@@ -34,12 +34,11 @@
   border: var(--card-border, (2px solid #000000));
   background-color: var(--card-background-color, #fff);
   padding-block: clamp(7.5625rem, 7.3644rem + 0.8451vw, 8.125rem);
-  /* padding: clamp(7.5rem, 7.3239rem + 0.7512vw, 8rem) 0; */
 }
 
 .header__title {
   width: 100%;
-  font-size: clamp(3.063rem, 1.502vw + 2.71rem, 4.063rem);;
+  font-size: clamp(3.063rem, 1.502vw + 2.71rem, 4.063rem);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -69,9 +68,9 @@
 }
 
 .card__title {
-  font-family: var(--cards-font, "Inter-Variable");  
+  font-family: var(--cards-font, "Inter-Variable");
   line-height: 1.15;
-  font-variation-settings: 'wght' var(--card-title-font-weight, 715);
+  font-variation-settings: "wght" var(--card-title-font-weight, 715);
   font-size: 18px;
   vertical-align: middle;
   padding: 4px 10px;
@@ -94,7 +93,7 @@
 }
 
 .contrasted {
-  filter: contrast(180%)
+  filter: contrast(180%);
 }
 
 .saturated {
@@ -119,7 +118,7 @@
   mix-blend-mode: hard-light;
 }
 
-@supports((text-stroke: 1px #fff) or (-webkit-text-stroke: 1px #fff)) {
+@supports ((text-stroke: 1px #fff) or (-webkit-text-stroke: 1px #fff)) {
   .image-lable {
     -webkit-text-stroke: 1px var(--text-stroke-color, #fff);
     text-stroke: 1px var(--text-stroke-color, #fff);
@@ -142,7 +141,6 @@
   font-size: 18px;
   line-height: 21px;
   padding: 26px;
-  /* padding: 25px; */
 }
 
 .card-footer {
@@ -168,12 +166,12 @@
 
 .button__text {
   display: inline-block;
-  color: #000;
   font-size: 14px;
   line-height: 90%;
   position: relative;
   z-index: 1;
-  transition: color 0.5s ease-in-out;  
+  transition: color 0.5s ease-in-out;
+  mix-blend-mode: difference;
 }
 
 .button__text::first-letter {
@@ -182,14 +180,26 @@
 
 .card__icon-button {
   all: unset;
+  box-sizing: border-box;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  border: 2px solid transparent;
+  padding: 5px 5px;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: #000;
 }
 
 .button-save {
   all: unset;
-  color: #fff;
   height: 55px;
   width: 335px;
-  background: var(--card-background-color, #fff);  
+  background: var(--card-background-color, #fff);
   isolation: isolate;
   border: var(--card-border, (2px solid #000));
   box-sizing: border-box;
@@ -203,8 +213,12 @@
 }
 
 .button-save .floppy__icon {
+  fill: #fff;
+  mix-blend-mode: difference;
   width: 21px;
   height: 21px;
+  z-index: 1;
+  position: relative;
 }
 
 #floppy-request {
@@ -239,7 +253,6 @@
   grid-column: span 2;
   border: var(--card-border, (2px solid #000));
   background-color: transparent;
-  color: #000;
   padding: 12.5px 132.5px;
   text-align: center;
   transition: box-shadow 0.3s ease;
@@ -251,6 +264,7 @@
 }
 
 .transitioned-button {
+  color: #fff;
   position: relative;
   overflow: hidden;
 }
@@ -268,24 +282,91 @@
   transform: translateX(0);
 }
 
+.contour {
+  transition: fill 0.1s linear 0s;
+}
+
+.core {
+  fill: transparent;
+  transition: fill 0.3s linear 0.03s;
+}
+
+.main-body {
+  fill: transparent;
+  transition: fill 0.3s linear 0s;
+}
+
+.sparks {
+  opacity: 0;
+}
+
+.like-icon {
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.like-icon.is-liked .heart {
+  animation: heart-burst 0.3s ease-in 0.1s 1 forwards;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparkle-pop 0.3s ease-in 0.3s 1 forwards;
+}
+
+.like-icon:hover .core {
+  fill: var(--heart-hover-color, #000);
+  transition-delay: 0;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--heart-hover-color, #000);
+  transition-delay: 0.05s;
+}
+
+.like-icon:active .core {
+  fill: var(--heart-active-color, #ff0000);
+  transition-delay: 0;
+}
+
+.like-icon:active .main-body {
+  fill: var(--heart-active-color, #ff0000);
+  transition-delay: 0.05s;
+}
+
+.like-icon.is-liked .core {
+  fill: var(--heart-active-color, #ff0000);
+  transition-delay: 0;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--heart-active-color, #ff0000);
+  transition-delay: 0.05s;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--heart-active-color, #ff0000);
+  transition-duration: 0.3s;
+  transition-delay: 0.06s;
+}
+
 @media (width < 380px) {
-.page {
+  .page {
     gap: 100px;
-}
+  }
 
-.card__title {
-  padding: 6px 12px;
-}
+  .card__title {
+    padding: 6px 12px;
+  }
 
-.button-save {
-  height: 84px;
-  width: 306px;
-  flex-direction: column;
-  gap: 8px;
-}
+  .button-save {
+    height: 84px;
+    width: 306px;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.button-save .floppy__icon {
-  width: 28px;
-  height: 28px;
-}
+  .button-save .floppy__icon {
+    width: 28px;
+    height: 28px;
+  }
 }
