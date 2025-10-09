@@ -237,7 +237,6 @@
   grid-template-rows: repeat(2, min-content);
   column-gap: 12px;
   row-gap: 30px;
-  padding: 30px;
 }
 
 #floppy-request[open] {
@@ -247,6 +246,7 @@
 #floppy-request .floppy__icon {
   width: 39px;
   height: 39px;
+  align-self: center;
 }
 
 #floppy-request::backdrop {
